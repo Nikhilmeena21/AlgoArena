@@ -11,6 +11,8 @@ import { auth, authAdmin } from './middleware/index.js';
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 8000;
+
 
 const prodOrigins = [
   process.env.FRONTEND_URL_2,
@@ -18,7 +20,7 @@ const prodOrigins = [
 
 ];
 //   const devOrigin = ['http://localhost:5173'];
-const allowedOrigins = prodOrigins;
+const allowedOrigins = process.env.NODE_ENV === 'production' ? prodOrigins : ['*'];
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -762,6 +764,6 @@ app.get("/contests/contest", async (req, res) => {
 
 
 
-app.listen(8000, () => {
-  console.log("Server is listening in port : 8000");
+app.listen(PORT, () => {
+  console.log(`Server is listening on port: ${PORT}`);
 });
