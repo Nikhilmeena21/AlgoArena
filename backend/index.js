@@ -20,11 +20,15 @@ const prodOrigins = [
 
 ];
 //   const devOrigin = ['http://localhost:5173'];
-const allowedOrigins = process.env.NODE_ENV === 'production' ? prodOrigins : ['*'];
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://algoarena-frontend-2vif.onrender.com',
+];
+
 app.use(
   cors({
     origin: (origin, callback) => {
-
+      console.log('Request origin:', origin);
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -32,6 +36,7 @@ app.use(
       }
 
     },
+    origin: true, 
     optionsSuccessStatus: 200,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
