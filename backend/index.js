@@ -11,24 +11,19 @@ import { auth, authAdmin } from './middleware/index.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8000;
 
-
+//middleware ,we used to get accept our data from frontend
 const prodOrigins = [
   process.env.FRONTEND_URL_2,
   process.env.FRONTEND_URL
 
 ];
 //   const devOrigin = ['http://localhost:5173'];
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  'https://algoarena-frontend-2vif.onrender.com',
-];
-
+const allowedOrigins = prodOrigins;
 app.use(
   cors({
     origin: (origin, callback) => {
-      console.log('Request origin:', origin);
+
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -36,7 +31,6 @@ app.use(
       }
 
     },
-    origin: true, 
     optionsSuccessStatus: 200,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -769,6 +763,6 @@ app.get("/contests/contest", async (req, res) => {
 
 
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port: ${PORT}`);
+app.listen(8000, () => {
+  console.log("Server is listening in port : 8000");
 });
