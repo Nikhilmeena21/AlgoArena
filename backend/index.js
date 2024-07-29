@@ -18,8 +18,7 @@ const prodOrigins = [
 ];
 //   const devOrigin = ['http://localhost:5173'];
 const allowedOrigins = prodOrigins;
-app.use(cors({ origin:process.env.FRONTEND_URL , credentials: true }));
-
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SECRET_KEY));
